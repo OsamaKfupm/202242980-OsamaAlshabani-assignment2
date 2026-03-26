@@ -27,3 +27,14 @@ The website includes sections such as About Me, Projects, and Contact.
 1. Download or clone the repository:
    ```bash
    git clone https://github.com/OsamaKfupm/id-name-assignment1.git
+
+
+## 🤖 AI Usage Summary
+
+AI tools such as ChatGPT were used to:
+
+Generate and structure HTML, CSS, and JavaScript code
+Debug issues and improve responsiveness
+Provide guidance on best practices
+
+(See full details in docs/ai-usage-report.md)
