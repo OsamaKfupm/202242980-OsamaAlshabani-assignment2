@@ -38,3 +38,5 @@ Debug issues and improve responsiveness
 Provide guidance on best practices
 
 (See full details in docs/ai-usage-report.md)
+# 202242980-OsamaAlshabani-assignment1
+Assignment1 SWE363
