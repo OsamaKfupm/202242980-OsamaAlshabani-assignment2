@@ -13,7 +13,9 @@
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
+        <li><a href="#news">AI News</a></li>
         <li><a href="#contact">Contact</a></li>
+        
       </ul>
       <button id="theme-toggle">Toggle Theme</button>
     </nav>
@@ -21,15 +23,19 @@
 
   <main>
     <section class="hero">
-      <div class="hero-content">
-        <h2>Hello, I'm Osama Alshabani</h2>
-        <p class="tagline">Aspiring AI and ML student, Web developer, and much more.</p>
-      </div>
-    </section>
+  <div class="hero-content">
+    <img src="assets/images/profile.jpg.jpeg" alt="Profile Picture" class="profile-pic" />
+
+    <h2>Hello, I'm Osama Alshabani</h2>
+    <p class="tagline">Aspiring AI and ML student, Web developer, and much more.</p>
+
+    <p class="hover-message"> وعليكم السلام ورحمة الله وبركاته</p>
+    </div>
+  </section>
 
     <section id="about" class="section">
       <h2>About Me</h2>
-      <p>
+      <p id="about-text">
         Computer Science student at KFUPM with a strong focus on machine learning and computer vision.
         Experienced in building and evaluating deep learning models, with particular interest in applied AI research
         and real-world deployment.
@@ -41,6 +47,14 @@
 
     <section id="projects" class="section">
       <h2>Projects</h2>
+      
+      <input
+        type="text"
+        id="project-search"
+        placeholder="Search projects..."
+        class="project-search"
+      />
+      <p id="no-results-message" style="display: none;">No projects found.</p>
 
       <div class="projects-container">
         <article class="project-card">
@@ -60,6 +74,13 @@
       </div>
     </section>
 
+    <section id="news" class="section">
+      <h2>Latest AI News</h2>
+      <button id="load-news">Load AI News</button>
+      <p id="news-status"></p>
+      <div id="news-list" class="news-container"></div>
+    </section>
+
     <section id="contact" class="section">
       <h2>Contact</h2>
       <form class="contact-form">
@@ -75,6 +96,9 @@
         <button type="submit">Send Message</button>
       </form>
     </section>
+
+      
+
   </main>
 
   <footer class="footer">

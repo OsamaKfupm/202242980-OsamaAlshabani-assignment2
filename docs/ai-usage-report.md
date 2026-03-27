@@ -1,38 +1,48 @@
 # AI Usage Report
 
-## Tools Used & Use Cases
+## 🛠️ Tools Used & Use Cases
 
 ### ChatGPT
-- Assisted in generating HTML structure for the portfolio
-- Helped create responsive CSS using Flexbox and Grid
-- Provided JavaScript functionality (theme toggle, form handling)
-- Assisted in debugging and improving code structure
+ChatGPT was used throughout the development process as an AI assistant for:
+
+- Generating the initial HTML structure of the portfolio website
+- Creating responsive CSS layouts using Flexbox and Grid
+- Writing JavaScript for interactivity (theme toggle, hover effects, search functionality)
+- Debugging issues related to styling, layout, and functionality
+- Assisting in implementing API integration for fetching AI-related news
+- Providing UI/UX improvement suggestions
 
 ---
 
-## Benefits & Challenges
+## ✅ Benefits & Challenges
 
 ### Benefits
-- Faster development and problem solving
-- Helped understand concepts like responsive design
-- Improved code quality and organization
+- Accelerated development process by quickly generating code templates
+- Improved understanding of responsive design and JavaScript concepts
+- Helped identify and fix bugs efficiently
+- Provided ideas for additional features (e.g., project filtering, AI news section)
 
 ### Challenges
-- Some generated code required modification
-- Needed to verify correctness and adapt code to assignment requirements
+- Some AI-generated code required debugging or adjustment
+- Needed to verify correctness and adapt code to match project requirements
+- Ensuring proper integration between different features (e.g., multiple JavaScript functionalities)
 
 ---
 
-## Learning Outcomes
-- Learned how to structure a web project
-- Improved understanding of HTML, CSS, and JavaScript
-- Gained experience using AI tools in development workflows
-- Learned how to debug and refine AI-generated code
+## 🎓 Learning Outcomes
+
+- Gained practical experience in building a complete front-end project
+- Learned how to integrate external APIs using JavaScript (Fetch API)
+- Improved understanding of DOM manipulation and event handling
+- Enhanced problem-solving skills by reviewing and modifying AI-generated code
+- Developed awareness of how to effectively use AI tools in a development workflow
 
 ---
 
-## Responsible Use & Modifications
-- Reviewed all AI-generated code before using it
-- Modified code to fit assignment requirements
-- Ensured originality and understanding of all implemented features
-- Tested functionality to ensure correctness
+## ⚖️ Responsible Use & Modifications
+
+- All AI-generated code was carefully reviewed and tested before implementation
+- Code was modified and adapted to ensure it met assignment requirements
+- Additional features and improvements were manually refined for better usability
+- Ensured understanding of all implemented features to maintain academic integrity
+- Avoided blindly copying code by analyzing and customizing AI suggestions
