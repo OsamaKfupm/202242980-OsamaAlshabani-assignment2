@@ -1,112 +1,129 @@
-const themeToggleButton = document.getElementById("theme-toggle");
-const contactForm = document.querySelector(".contact-form");
+// Helper function for safer element selection
+const $ = (selector) => document.querySelector(selector);
+const $$ = (selector) => document.querySelectorAll(selector);
 
-themeToggleButton.addEventListener("click", () => {
+// Theme toggle
+$("#theme-toggle")?.addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
 });
 
-contactForm.addEventListener("submit", (event) => {
+// Contact form
+$(".contact-form")?.addEventListener("submit", (event) => {
   event.preventDefault();
   alert("Thank you! Your message has been received.");
-  contactForm.reset();
+  event.target.reset();
 });
 
-const profilePic = document.querySelector(".profile-pic");
-const hoverMessage = document.querySelector(".hover-message");
+// Profile picture hover message
+const profilePic = $(".profile-pic");
+const hoverMessage = $(".hover-message");
 
-profilePic.addEventListener("mouseenter", () => {
-  hoverMessage.style.opacity = "1";
-});
+if (profilePic && hoverMessage) {
+  profilePic.addEventListener("mouseenter", () => {
+    hoverMessage.style.opacity = "1";
+  });
 
-profilePic.addEventListener("mouseleave", () => {
-  hoverMessage.style.opacity = "0";
-});
+  profilePic.addEventListener("mouseleave", () => {
+    hoverMessage.style.opacity = "0";
+  });
+}
 
-const projectSearch = document.getElementById("project-search");
-const projectCards = document.querySelectorAll(".project-card");
-const noResultsMessage = document.getElementById("no-results-message");
+// Project search
+const projectSearch = $("#project-search");
+const projectCards = $$(".project-card");
+const noResultsMessage = $("#no-results-message");
 
-projectSearch.addEventListener("input", () => {
+projectSearch?.addEventListener("input", () => {
   const searchValue = projectSearch.value.toLowerCase().trim();
   let visibleCount = 0;
 
   projectCards.forEach((card) => {
-    const title = card.querySelector("h3").textContent.toLowerCase();
-    const description = card.querySelector("p").textContent.toLowerCase();
-    const matches =
+    const title = card.querySelector("h3")?.textContent.toLowerCase() || "";
+    const description = card.querySelector("p")?.textContent.toLowerCase() || "";
+
+    const isMatch =
       title.includes(searchValue) || description.includes(searchValue);
 
-    card.style.display = matches ? "block" : "none";
+    card.style.display = isMatch ? "block" : "none";
 
-    if (matches) {
-      visibleCount++;
-    }
+    if (isMatch) visibleCount++;
   });
 
-  noResultsMessage.style.display = visibleCount === 0 ? "block" : "none";
+  if (noResultsMessage) {
+    noResultsMessage.style.display = visibleCount ? "none" : "block";
+  }
 });
 
-const newsButton = document.getElementById("load-news");
-const newsList = document.getElementById("news-list");
-const newsStatus = document.getElementById("news-status");
+// AI news loader
+const newsButton = $("#load-news");
+const newsList = $("#news-list");
+const newsStatus = $("#news-status");
 
-if (newsButton) {
-  newsButton.addEventListener("click", async () => {
-    newsList.innerHTML = "";
-    newsStatus.textContent = "Loading AI news...";
+const aiKeywords = ["ai", "artificial intelligence", "machine learning", "llm"];
 
-    try {
-      const response = await fetch("https://hacker-news.firebaseio.com/v0/topstories.json");
-      const storyIds = await response.json();
+newsButton?.addEventListener("click", async () => {
+  if (!newsList || !newsStatus) return;
 
-      let count = 0;
+  newsList.innerHTML = "";
+  newsStatus.textContent = "Loading AI news...";
 
-      for (let i = 0; i < storyIds.length && count < 5; i++) {
-        const storyResponse = await fetch(
-          `https://hacker-news.firebaseio.com/v0/item/${storyIds[i]}.json`
-        );
-        const story = await storyResponse.json();
+  try {
+    const response = await fetch(
+      "https://hacker-news.firebaseio.com/v0/topstories.json"
+    );
 
-        if (
-          story &&
-          story.title &&
-          (story.title.toLowerCase().includes("ai") ||
-            story.title.toLowerCase().includes("artificial intelligence") ||
-            story.title.toLowerCase().includes("machine learning") ||
-            story.title.toLowerCase().includes("llm"))
-        ) {
-          const card = document.createElement("div");
-          card.classList.add("news-card");
+    const storyIds = await response.json();
+    let foundStories = 0;
 
-          const storyUrl = story.url ? story.url : `https://news.ycombinator.com/item?id=${story.id}`;
+    for (const id of storyIds) {
+      if (foundStories === 5) break;
 
-          card.innerHTML = `
-            <a href="${storyUrl}" target="_blank" rel="noopener noreferrer">${story.title}</a>
-            <p>Source: Hacker News</p>
-          `;
+      const storyResponse = await fetch(
+        `https://hacker-news.firebaseio.com/v0/item/${id}.json`
+      );
 
-          newsList.appendChild(card);
-          count++;
-        }
-      }
+      const story = await storyResponse.json();
 
-      if (count === 0) {
-        newsStatus.textContent = "No AI-related news found right now.";
-      } else {
-        newsStatus.textContent = "";
-      }
-    } catch (error) {
-      newsStatus.textContent = "Sorry, failed to load AI news. Please try again later.";
+      if (!story?.title) continue;
+
+      const title = story.title.toLowerCase();
+      const isAiRelated = aiKeywords.some((keyword) =>
+        title.includes(keyword)
+      );
+
+      if (!isAiRelated) continue;
+
+      const storyUrl =
+        story.url || `https://news.ycombinator.com/item?id=${story.id}`;
+
+      const card = document.createElement("div");
+      card.className = "news-card";
+
+      card.innerHTML = `
+        <a href="${storyUrl}" target="_blank" rel="noopener noreferrer">
+          ${story.title}
+        </a>
+        <p>Source: Hacker News</p>
+      `;
+
+      newsList.appendChild(card);
+      foundStories++;
     }
-  });
-}
 
+    newsStatus.textContent =
+      foundStories === 0 ? "No AI-related news found right now." : "";
+  } catch {
+    newsStatus.textContent =
+      "Sorry, failed to load AI news. Please try again later.";
+  }
+});
 
-const aboutText = document.getElementById("about-text");
+// About text word animation setup
+const aboutText = $("#about-text");
 
 if (aboutText) {
-  const words = aboutText.textContent.split(" ");
-  aboutText.innerHTML = words
+  aboutText.innerHTML = aboutText.textContent
+    .split(" ")
     .map((word) => `<span class="word">${word}</span>`)
     .join(" ");
 }
